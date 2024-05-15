@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+    <style>
+        /* 内联样式（但通常我们会放在<head>部分的<style>标签中） */
+        h1 {
+            text-align: center; /* 水平居中 */
+            margin-top: 20px; /* 上下外边距可以根据需要调整 */
+            margin-bottom: 20px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>首页</h1>
+    <h1>{{ request.session.user_name }}!  欢迎回来！</h1>
+    <a href="/app01/logout/">登出</a>
+</p>
+</body>
+</html>

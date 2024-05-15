@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--  meta标签在最前面  -->
+    <!-- 导入Bootstrap CSS -->
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'login/css/login.css' %}" rel="stylesheet"/>
+    <title>login</title>
+
+</head>
+<body>
+   <div class="container">
+            <div class="col">
+              <form class="form-login" action="/app01/login/" method="post">
+                {% if message %}
+                    <div class="alert alert-danger text-center">{{ message }}</div>
+                {% elif login_form.captcha.errors %}
+                    <div class="alert alert-danger text-center">{{ login_form.captcha.errors.0 }}</div>
+                {% endif %}
+                {% csrf_token %}
+                <h3 class="text-center">用户登陆</h3>
+
+                <div class="form-group">
+                    {{ login_form.username.label_tag }}
+                    {{ login_form.username}}
+                </div>
+                <div class="form-group">
+                    {{ login_form.password.label_tag }}
+                    {{ login_form.password }}
+                </div>
+                <div class="form-group">
+                    {{ login_form.captcha.label_tag }}
+                    {{ login_form.captcha }}
+                </div>
+
+                <div>
+                  <a href="/app01/register/" ><ins>新用户注册</ins></a>
+                  <a href="/app01/reset_password/"><ins>重置密码</ins></a>
+                  <button type="submit" class="btn btn-primary float-right ">登录</button>
+                </div>
+              </form>
+            </div>
+    </div>
+
+    {# 以下三者的引用顺序是固定的 #}
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.15.0/umd/popper.js"></script>
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+     //点击刷新验证码
+    $(function () {
+        $('.captcha').css({
+            'cursor': 'pointer'
+        });
+        // ajax刷新
+        $('.captcha').click(function () {
+            console.log('click');
+            $.get("{% url 'captcha-refresh' %}",
+                function (result) {
+                    $('.captcha').attr('src', result['image_url']);
+                    $('#id_captcha_0').val(result['key'])
+                });
+        });
+    })
+</script>
+</body>
+</html>

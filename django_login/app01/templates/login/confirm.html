@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>confirm</title>
+    <style>
+        /* 内联样式 h1标签水平居中 */
+        h1 {
+            text-align: center; /* 水平居中 */
+            margin-top: 20px; /* 上下外边距可以根据需要调整 */
+            margin-bottom: 20px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>{{ message }}</h1>
+
+    <script> // 页面中通过JS代码，设置2秒后自动跳转到登录页面。
+        window.setTimeout("window.location='/app01/login/'",2000);
+    </script>
+
+</body>
+</html>
